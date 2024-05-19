@@ -1,4 +1,59 @@
-/******* Change Box Model ***************/
+/* Add this section for inventory management view */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+#management-links {
+  margin-top: 20px;
+}
+
+#management-links a {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#management-links a:hover {
+  background-color: #ddd;
+}
+
+/* Add this section for adjusting the box model */
 *,
 *:before,
 *:after {
