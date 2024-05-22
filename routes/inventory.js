@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const authorizeRoles = require('../middleware/authorize');
 const Vehicle = require('../../models/vehicleModel');
 const { renderVehicleDetail } = require('../../utilities');
+
+// Route to manage inventory (restricted to Employee and Admin roles)
+router.get('/manage', authorizeRoles('Employee', 'Admin'), (req, res) => {
+  res.render('inventory/manage');
+});
 
 // Route to display vehicle detail
 router.get('/:id', async (req, res, next) => {
@@ -17,5 +23,7 @@ router.get('/:id', async (req, res, next) => {
         next(err);
     }
 });
+
+// Add other inventory routes here as needed
 
 module.exports = router;
