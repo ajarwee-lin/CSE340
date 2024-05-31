@@ -1,4 +1,4 @@
-const pool = require('../database/');
+const pool = require('./database');
 
 exports.getAccountById = async (account_id) => {
   const sql = 'SELECT * FROM accounts WHERE account_id = $1';
