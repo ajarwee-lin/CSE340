@@ -9,9 +9,9 @@ const express = require("express");
 const env = require("dotenv").config();
 const cookieParser = require('cookie-parser');
 const app = express();
-const static = require("./routes/static");
-const accountRoutes = require('./routes/accountRoutes'); // Added import statement
-const inventoryRoutes = require('./routes/inventoryRoutes');
+const static = require("./route/static");
+const accountRoutes = require('./route/accountRoutes'); // Added import statement
+const inventoryRoutes = require('./route/inventoryRoutes');
 
 /* ***********************
  * Middleware
