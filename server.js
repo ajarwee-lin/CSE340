@@ -7,8 +7,11 @@
  *************************/
 const express = require("express");
 const env = require("dotenv").config();
+const cookieParser = require('cookie-parser');
 const app = express();
 const static = require("./routes/static");
+const accountRoutes = require('./routes/accountRoutes');
+const inventoryRoutes = require('./routes/inventoryRoutes');
 
 /* ***********************
  * Middleware
@@ -16,11 +19,14 @@ const static = require("./routes/static");
 // Middleware to parse JSON and url-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 /* ***********************
  * Routes
  *************************/
 app.use(static);
+app.use(accountRoutes); // Add account routes
+app.use('/inv', inventoryRoutes); // Ensure inventory routes are prefixed with '/inv'
 
 /* ***********************
  * Local Server Information

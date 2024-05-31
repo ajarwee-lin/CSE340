@@ -1,0 +1,9 @@
+<% if (locals.user) { %>
+    <p>Welcome, <%= locals.user.firstName %></p>
+    <a href="/account-management">My Account</a>
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  <% } %>
+  

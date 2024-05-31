@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account Management</title>
+</head>
+<body>
+  <h1>Account Management</h1>
+  <h2>Welcome, <%= user.firstName %></h2>
+  <a href="/account/update/<%= user.id %>">Update Account Information</a>
+  <% if (user.accountType === 'Employee' || user.accountType === 'Admin') { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv">Manage Inventory</a></p>
+  <% } %>
+</body>
+</html>
