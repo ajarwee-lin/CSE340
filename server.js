@@ -10,7 +10,7 @@ const env = require("dotenv").config();
 const cookieParser = require('cookie-parser');
 const app = express();
 const static = require("./routes/static");
-const accountRoutes = require('./routes/accountRoutes');
+const accountRoutes = require('./routes/accountRoutes'); // Added import statement
 const inventoryRoutes = require('./routes/inventoryRoutes');
 
 /* ***********************
