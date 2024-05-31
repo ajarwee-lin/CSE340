@@ -8,9 +8,11 @@
 const express = require("express");
 const env = require("dotenv").config();
 const cookieParser = require('cookie-parser');
+const accountModel = require('./models/accountModel'); // Include accountModel
+const bcrypt = require('bcrypt');
 const app = express();
 const static = require("./routes/static");
-const accountRoutes = require('./routes/accountRoutes'); // Added import statement
+const accountRoutes = require('./routes/accountRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 
 /* ***********************
@@ -22,11 +24,54 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /* ***********************
+ * Account Controller
+ *************************/
+// Account Management View
+exports.accountManagementView = (req, res) => {
+  res.render('accountManagement', { user: req.user });
+};
+
+// Update Account View
+exports.updateAccountView = async (req, res) => {
+  const user = await accountModel.getAccountById(req.params.id);
+  res.render('updateAccount', { user });
+};
+
+// Update Account
+exports.updateAccount = async (req, res) => {
+  const { account_id, first_name, last_name, email } = req.body;
+  try {
+    await accountModel.updateAccount({ account_id, first_name, last_name, email });
+    res.redirect('/account-management');
+  } catch (error) {
+    res.status(500).send('Error updating account: ' + error.message);
+  }
+};
+
+// Change Password
+exports.changePassword = async (req, res) => {
+  const { account_id, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    await accountModel.updatePassword(account_id, hashedPassword);
+    res.redirect('/account-management');
+  } catch (error) {
+    res.status(500).send('Error changing password: ' + error.message);
+  }
+};
+
+// Logout
+exports.logout = (req, res) => {
+  res.clearCookie('token');
+  res.redirect('/');
+};
+
+/* ***********************
  * Routes
  *************************/
 app.use(static);
-app.use(accountRoutes); // Add account routes
-app.use('/inv', inventoryRoutes); // Ensure inventory routes are prefixed with '/inv'
+app.use(accountRoutes);
+app.use('/inv', inventoryRoutes);
 
 /* ***********************
  * Local Server Information
