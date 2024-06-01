@@ -1,6 +1,55 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+#vehicle-detail {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+#vehicle-detail img {
+  max-width: 100%;
+  height: auto;
+}
+
+#vehicle-upgrades {
+  margin-top: 20px;
+}
+
+.upgrade {
+  display: inline-block;
+  margin-right: 10px;
 }

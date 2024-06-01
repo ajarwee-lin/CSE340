@@ -6,8 +6,12 @@ exports.accountManagementView = (req, res) => {
 };
 
 exports.updateAccountView = async (req, res) => {
-  const user = await accountModel.getAccountById(req.params.id);
-  res.render('updateAccount', { user });
+  try {
+    const user = await accountModel.getAccountById(req.params.id);
+    res.render('updateAccount', { user });
+  } catch (error) {
+    res.status(500).send('Error fetching account details: ' + error.message);
+  }
 };
 
 exports.updateAccount = async (req, res) => {
@@ -22,8 +26,8 @@ exports.updateAccount = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
   const { account_id, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     await accountModel.updatePassword(account_id, hashedPassword);
     res.redirect('/account-management');
   } catch (error) {

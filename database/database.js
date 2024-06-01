@@ -1,12 +1,19 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-// Create a new pool instance
+dotenv.config();
+
 const pool = new Pool({
-  user: 'dbnamecse340', // Updated with the actual database username
-  host: 'dpg-cospjtacn0vc73eofd0g-a', // Updated with the actual database hostname
-  database: 'dbnamecse340', // Update this with your actual database name
-  password: 'Ayp9XzEdFdnEkJy2nI3I6ymyjnwLbbPG', // Update this with your actual database password
-  port: 5432, // Change if your database is running on a different port
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
 });
 
 module.exports = {
