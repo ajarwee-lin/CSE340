@@ -25,11 +25,15 @@
 </head>
 <body>
   <h1>Account Management</h1>
-  <h2>Welcome, <%= _.escape(user.firstName) %></h2>
-  <a href="/account/update/<%= _.escape(user.id) %>">Update Account Information</a>
-  <% if (user.accountType === 'Employee' || user.accountType === 'Admin') { %>
-    <h3>Inventory Management</h3>
-    <p><a href="/inv">Manage Inventory</a></p>
+  <% if (user) { %>
+    <h2>Welcome, <%= _.escape(user.firstName) %></h2>
+    <a href="/account/update/<%= _.escape(user.id) %>">Update Account Information</a>
+    <% if (user.accountType === 'Employee' || user.accountType === 'Admin') { %>
+      <h3>Inventory Management</h3>
+      <p><a href="/inv">Manage Inventory</a></p>
+    <% } %>
+  <% } else { %>
+    <p>Error: User not found</p>
   <% } %>
 </body>
 </html>
